@@ -35,8 +35,8 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="title{{$l}}">Slug ({{$k->lang_short}})</label>
-                                                        <input required type="text" id="title{{$l}}" class="form-control" name="slug[]">
+                                                        <label for="slug{{$l}}">Slug ({{$k->lang_short}})</label>
+                                                        <input required type="text" id="slug{{$l}}" class="form-control" name="slug[]">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">

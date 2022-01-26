@@ -81,7 +81,7 @@
                         <div class="tab-pane px-0" id="tabpaneCont_2" aria-labelledby="tabpaneCont_2">
                             <div class="col-12">
                                 <div class="card-body px-1"> 
-                                    <form class="dropzone dropzone-area form-group" enctype="multipart/form-data" method="post" id="multple-file-upload" action="{{route("admin.text.uploadPictures")}}">
+                                    <form class="dropzone dropzone-area form-group" enctype="multipart/form-data" method="post" id="multple-file-upload" action="{{route('admin.text.uploadPictures')}}">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$page->id}}">
                                     </form>
@@ -96,19 +96,16 @@
 @endsection
 
 
-@section("js")
-    <script src="/back/app-assets/vendors/js/katex.min.js" type="text/javascript"></script>
-    <script src="/back/app-assets/vendors/js/highlight.min.js" type="text/javascript"></script>
-    <script src="/back/app-assets/vendors/ckeditor/ckeditor.js" type="text/javascript"></script>
-    <script src="/back/app-assets/vendors/js/dropzone.min.js" type="text/javascript"></script>
-    <script src="/back/dropify/js/dropify.min.js"></script>
+@section("js") 
     <script>
         $(document).ready(function () {
-            @foreach($lng as $l => $k)
-                CKEDITOR.replace( 'text{{$l}}' );
-            @endforeach
-            CKEDITOR.config.height = 400;
-            $('.dropify').dropify();
+            @foreach($lng as $l => $k) 
+                ClassicEditor
+                .create( document.querySelector( '#text{{$l}}' ) )
+                .catch( error => {
+                    //console.error( error );
+                } );
+            @endforeach 
         });
 
         Dropzone.autoDiscover = false;
@@ -152,7 +149,7 @@
                     thisDropzone.emit("addedfile", mockFile);
                     thisDropzone.emit("success", mockFile);
                     thisDropzone.emit("complete",mockFile);
-                    thisDropzone.emit("thumbnail", mockFile, "{{url("uploads/" . $p->img)}}");
+                    thisDropzone.emit("thumbnail", mockFile, "{{url('uploads/' . $p->img)}}");
                 @endforeach
 
                 $(".dz-preview").each(function (){
@@ -193,13 +190,5 @@
             }
         });*/
     </script>
-@endsection
-
-
-@section("css")
-    <link rel="stylesheet" type="text/css" href="/back/app-assets/vendors/css/dropzone.min.css">
-    <link rel="stylesheet" type="text/css" href="/back/app-assets/vendors/css/katex.min.css">
-    <link rel="stylesheet" type="text/css" href="/back/app-assets/vendors/css/monokai-sublime.min.css">
-    <link rel="stylesheet" type="text/css" href="/back/dropify/css/dropify.min.css">
 @endsection
 

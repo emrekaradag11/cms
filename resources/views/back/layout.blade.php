@@ -19,6 +19,7 @@
     <link href="{{asset('back/css/bootstrap-tagsinput.css')}}" rel="stylesheet" />
     <link href="{{asset('back/css/select2.min.css')}}" rel="stylesheet" />
     <link href="{{asset('back/css/sweetalert2.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('back/plugins/fontawesome/css/all.min.css')}}" rel="stylesheet" />
     @yield("css")
     <script src="{{asset('back/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('back/js/jquery-ui.min.js')}}"></script>
@@ -323,6 +324,7 @@
     <script src="{{asset('back/js/bootstrap-tagsinput.js')}}"></script>
     <script src="{{asset('back/js/select2.full.min.js')}}"></script>
     <script src="{{asset('back/js/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('back/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
     @yield("js")
 
     @isset($errors)

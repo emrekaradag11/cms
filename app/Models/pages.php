@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\pages_dtl;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class pages extends Model
@@ -18,26 +19,10 @@ class pages extends Model
 
 
 
+    use SoftDeletes;
     protected $table = "pages";
     protected $guarded  = ["id"];
     
-    
-    public function setText($request)
-    {
-
-        $dtl = new pages_dtl();
-        $dtl->setTextDtl($request , $request->post("page_id"));
-
-        $noti = array(
-            'message' => "Başarıyla Güncellendi",
-            'head'=>'İşlem Başarılı',
-            'type' => 'success',
-            'status' => '200'
-        );
-
-        return $noti;
-
-    }
 
 
     public function change_order($request){

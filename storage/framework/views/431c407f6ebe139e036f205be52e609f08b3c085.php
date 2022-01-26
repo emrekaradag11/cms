@@ -12,12 +12,17 @@
                 </section>
             </div>
         </div>
-    </div> 
+    </div>
+
+    <form action="" class="d-none js_delete_form" method="POST">
+        <?php echo csrf_field(); ?>
+        <?php echo method_field('DELETE'); ?>
+    </form>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection("js"); ?>
     <script type="text/javascript">
         $(".js_delete").on("click",function () {
-            $(".js_delete_form").attr("action","tree/" + $(this).data("id")).submit();
+            $(".js_delete_form").attr("action",$(this).data("id")).submit();
         })
 
         $( ".sortables" ).sortable({
@@ -70,7 +75,7 @@
                 },
                 url: "<?php echo route('admin.tree.hidden'); ?>",
                 success: function (res) {
-                    item.find("i").removeAttr("class").addClass("fa " + res.icon);
+                    item.find("i").removeAttr("class").addClass("fal " + res.icon);
                 }
             });
         });

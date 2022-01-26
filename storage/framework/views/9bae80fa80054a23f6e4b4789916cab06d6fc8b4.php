@@ -19,6 +19,7 @@
     <link href="<?php echo e(asset('back/css/bootstrap-tagsinput.css')); ?>" rel="stylesheet" />
     <link href="<?php echo e(asset('back/css/select2.min.css')); ?>" rel="stylesheet" />
     <link href="<?php echo e(asset('back/css/sweetalert2.min.css')); ?>" rel="stylesheet" />
+    <link href="<?php echo e(asset('back/plugins/fontawesome/css/all.min.css')); ?>" rel="stylesheet" />
     <?php echo $__env->yieldContent("css"); ?>
     <script src="<?php echo e(asset('back/js/jquery-3.6.0.min.js')); ?>"></script>
     <script src="<?php echo e(asset('back/js/jquery-ui.min.js')); ?>"></script>
@@ -324,6 +325,7 @@
     <script src="<?php echo e(asset('back/js/bootstrap-tagsinput.js')); ?>"></script>
     <script src="<?php echo e(asset('back/js/select2.full.min.js')); ?>"></script>
     <script src="<?php echo e(asset('back/js/sweetalert2.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('back/plugins/ckeditor/ckeditor.js')); ?>" type="text/javascript"></script>
     <?php echo $__env->yieldContent("js"); ?>
 
     <?php if(isset($errors)): ?>

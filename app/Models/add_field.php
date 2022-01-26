@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\{add_field_dtl};
 
 class add_field extends Model
@@ -38,6 +39,7 @@ class add_field extends Model
     */
 
 
+    use SoftDeletes;
     protected $table = "add_field";
     protected $guarded  = ["id"];
 

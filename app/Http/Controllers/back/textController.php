@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\back;
 
 use App\Http\Controllers\Controller;
-use App\Models\{add_field, field_data, pages, lang, img};
+use App\Models\{add_field, field_data, pages, lang, img, pages_dtl};
 use Illuminate\Http\Request;
 
 class textController extends Controller
@@ -83,8 +83,23 @@ class textController extends Controller
     public function update(Request $request)
     {
 
-        $pages = new pages(); 
-        $pages->setText($request);
+        $dtl = new pages_dtl();
+        $lang = new lang();
+        $lang = $lang->lang_short();
+        foreach ($lang as $l => $k) {
+            $dtl->
+                updateOrCreate(
+                    [
+                        "group_id" => $request->post("page_id"),
+                        'lang' => $k->id
+                    ], [
+                        "description" => $request->post("description")[$l],
+                        "keywords" => $request->post("keywords")[$l],
+                        "text" => $request->post("text")[$l],
+                    ]
+                );
+        }
+        toastr()->success('Başarıyla Güncellendi','İşlem Başarılı');
         return redirect()->back();
     }
 

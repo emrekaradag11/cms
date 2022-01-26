@@ -75,6 +75,7 @@ Route::middleware(['adminUserAuth'])->group(function () {
         Route::get('/tree/{id?}/edit/{page_id?}', [treeController::class,'edit'])->name('tree.edits');
         Route::post('/treeSortable', [treeController::class,'sortable'])->name('tree.sortable');
         Route::post('/treeHidden', [treeController::class,'hidden'])->name('tree.hidden');
+        Route::post('/treeUploadPictures', [treeController::class,'uploadPictures'])->name('tree.uploadPictures');
 
         Route::resource('tree', treeController::class)->names([
             'index' => 'tree.index', 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class field_data extends Model
 {
@@ -23,6 +24,7 @@ class field_data extends Model
      */
 
 
+    use SoftDeletes;
     protected $table = "field_data";
     protected $guarded  = ["id"];
 

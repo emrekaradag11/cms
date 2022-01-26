@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class lang extends Model
 {
@@ -15,6 +16,7 @@ class lang extends Model
    */
 
 
+    use SoftDeletes;
     protected $table = "lang";
     protected $guarded  = ["id"];
 

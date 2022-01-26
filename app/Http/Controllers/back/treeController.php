@@ -11,6 +11,7 @@ class treeController extends Controller
     public function __construct()
     {
         view()->share('lng',lang::get());
+
     }
     /**
      * Display a listing of the resource.
@@ -93,9 +94,18 @@ class treeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id = "", $page_id = "")
     {
-        //
+        $fieldModel = new add_field();
+        $fieldDataModel = new field_data();
+        $page = pages::find($page_id);
+        $tree = tree::where("page_id" , $page_id)->get();
+        $data = tree::where("id" , $id)->first();
+
+        $fields = $fieldModel->getFieldWithPageId($page->id);
+        $fieldData = $fieldDataModel->getFieldData($page->id,$id);
+        
+        return view(('back.tree.edit') , compact("page","tree","data","fields","fieldData"));
     }
 
     /**
@@ -107,7 +117,39 @@ class treeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $tree = new tree();
+        $tree
+            ->where("id" , $id)
+            ->update([
+                "parent_id" => $request->post("parent_id"),
+                "type" => $request->post("type"),
+            ]);
+
+
+        $lang = new lang();
+        $lang = $lang->lang_short();
+        
+
+        foreach ($lang as $l => $k) {
+            $dtl = new tree_dtl();
+            $dtl->
+            updateOrCreate(
+                [
+                    "group_id" => $id,
+                    'lang' => $k->id
+                ], [
+                    "title" => $request->post("title")[$l],
+                    "slug" => $request->post("slug")[$l],
+                    "text" => $request->post("text")[$l],
+                    "description" => $request->post("description")[$l],
+                    "keywords" => $request->post("keywords")[$l],
+                ]
+            );
+        }
+        toastr()->success('Başarıyla Düzenlendi','İşlem Başarılı');
+
+        return redirect()->back();
     }
 
     /**
@@ -118,7 +160,13 @@ class treeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        tree::find($id)->delete();
+
+        toastr()->success('Silme İşlemi Başarılı','İşlem Başarılı');
+
+        return redirect()->back();
+
     }
 
     public function sortable(Request $request){
@@ -137,5 +185,16 @@ class treeController extends Controller
             $response = $tree->changeHidden($request);
         }
         return $response;
+    }
+
+    public function uploadPictures(Request $request)
+    {
+        $detail = tree::find($request->id);
+        if($request->file("file")){
+            $uploadImg = fileUpload($request->file("file"),"uploads",$detail->getFirstName->title,"");
+            $detail->image()->create(
+                ['img' => $uploadImg,],
+            );
+        }
     }
 }

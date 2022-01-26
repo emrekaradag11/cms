@@ -34650,6 +34650,10 @@ blockquote {
     text-decoration: none;
     background-color: #10163a
 }
+.ck-editor__editable_inline {
+    min-height: 400px;
+}
+
 
 
 

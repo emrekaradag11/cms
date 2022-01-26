@@ -26,49 +26,5 @@ class tree_dtl extends Model
 
     protected $table = "tree_dtl";
     protected $guarded  = ["id"];
-
-    public function setDtl($request,$metadata)
-    {
-        $lang = new lang();
-        $lang = $lang->lang_short();
-        foreach ($lang as $l => $k) {
-
-            $data = new tree_dtl();
-            $data->metadata = $metadata;
-            $data->title = $request->post("title")[$l];
-            $data->text = $request->post("text")[$l];
-            $data->description = $request->post("description")[$l];
-            $data->keywords = $request->post("keywords")[$l];
-            $data->lang = $k->id;
-
-            $data->save();
-
-        }
-        return true;
-    }
-
-    public function update_dtl($request,$metadata)
-    {
-
-        $lang = new lang();
-        $lang = $lang->lang_short();
-        foreach ($lang as $l => $k) {
-            $this->
-            updateOrCreate(
-                [
-                    "metadata" => $metadata,
-                    'lang' => $k->id
-                ], [
-                    "title" => $request->post("title")[$l],
-                    "text" => $request->post("text")[$l],
-                    "description" => $request->post("description")[$l],
-                    "keywords" => $request->post("keywords")[$l],
-                ]
-            );
-        }
-        return true;
-
-    }
-
-
+    
 }

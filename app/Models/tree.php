@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\{tree_dtl};
+use App\Models\{tree_dtl, img};
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class tree extends Model
 {
@@ -22,49 +23,10 @@ class tree extends Model
 
     */
 
+    use SoftDeletes;
     protected $table = "tree";
     protected $guarded  = ["id"];
-
-
-    public function set_tree($request)
-    {
-        $data = new tree();
-
-        $data->parent = $request->post("parent");
-        $data->type = $request->post("type");
-        $data->page_id = $request->post("page_id");
-        $data->save();
-        $metadata = $data->id;
-
-        $dtl = new tree_dtl();
-        $dtl->setDtl($request , $metadata);
-
-
-        /*
-        imgParent
-        imgType
-        imgDeleted
-        imgSlugName
-        imgID
-
-        */
-        $request["imgParent"] = $metadata;
-        $request["imgSlugName"] = $request->post("title")[0];
-
-        $imgModel = new img();
-        $imgModel->set_img($request);
-
-
-
-        $noti = array(
-            'message' => "Başarıyla Eklendi",
-            'head'=>'İşlem Başarılı',
-            'type' => 'success',
-            'status' => '200'
-        );
-
-        return $noti;
-    }
+    
 
     public function updateTree($request)
     {
@@ -181,6 +143,12 @@ class tree extends Model
 
         return $noti;
 
+    }
+
+
+    public function image()
+    {
+        return $this->morphMany(img::class, 'imageable')->orderBy("ord");
     }
 
 

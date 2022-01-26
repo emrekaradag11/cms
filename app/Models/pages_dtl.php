@@ -25,27 +25,4 @@ class pages_dtl extends Model
     protected $table = "pages_dtl";
     protected $guarded  = ["id"];
     
-    public function setTextDtl($request,$metadata)
-    {
-
-        $lang = new lang();
-        $lang = $lang->lang_short();
-        foreach ($lang as $l => $k) {
-            $this->
-                updateOrCreate(
-                    [
-                        "group_id" => $metadata,
-                        'lang' => $k->id
-                    ], [
-                        "description" => $request->post("description")[$l],
-                        "keywords" => $request->post("keywords")[$l],
-                        "text" => $request->post("text")[$l],
-                    ]
-                );
-        }
-        return true;
-
-    }
-
-
 }

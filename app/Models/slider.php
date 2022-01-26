@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class slider extends Model
 {
@@ -15,6 +16,7 @@ class slider extends Model
         #ord      => bu alan datalar arası sıralama yapmak içindir
      */
 
+    use SoftDeletes;
     protected $table = "slider";
     protected $guarded  = ["id"];
 }
