@@ -147,7 +147,7 @@ class treeController extends Controller
                 ]
             );
         }
-        toastr()->success('Başarıyla Düzenlendi','İşlem Başarılı');
+        toastr()->success('Başarıyla Güncellendi','İşlem Başarılı');
 
         return redirect()->back();
     }

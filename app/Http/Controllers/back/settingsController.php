@@ -3,83 +3,59 @@
 namespace App\Http\Controllers\back;
 
 use App\Http\Controllers\Controller;
+use App\Models\{settings,settings_dtl,lang};
 use Illuminate\Http\Request;
 
 class settingsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        view()->share('lng',lang::get());
+
+    }
+    
     public function index()
     {
-        return view('back.settings.index');
+        $data = settings::all();
+        return view('back.settings.index',compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function update(request $request){
+        
+        $data = $request->except('_token','_method');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        foreach ($data as $kk => $vv) {
+            $settings = new settings();
+            $group_id = $settings
+                        ->where("name" , $kk)
+                        ->first()
+                        ->id;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+            $lang = new lang();
+            $lang = $lang->lang_short();
+        
+            foreach ($lang as $l => $k) {
+                $dtl = new settings_dtl();
+                $updatedData = $vv;
+                if(is_array($updatedData)){
+                    $updatedData = $vv[$l];
+                }
+                $dtl->
+                updateOrCreate(
+                    [
+                        "group_id" => $group_id,
+                        'lang' => $k->id
+                    ], [
+                        'option' => $updatedData,
+                    ]
+                );
+            }
+        }
+        
+        
+        toastr()->success('Başarıyla Güncellendi','İşlem Başarılı');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return redirect()->back();
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

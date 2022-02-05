@@ -99,9 +99,7 @@
                                                     </div>
                                                     
                                                     <div class="form-actions col-12 px-0 mt-4 text-right"> 
-                                                        <button type="submit" class="btn btn-raised btn-raised btn-primary">
-                                                            <i class="fa fa-check-square-o"></i> Kaydet
-                                                        </button>
+                                                        <button type="submit" class="btn btn-raised btn-raised btn-primary"> Kaydet </button>
                                                     </div>
                                                 </div>
                                             </form>

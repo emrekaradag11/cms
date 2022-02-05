@@ -60,14 +60,8 @@ Route::middleware(['adminUserAuth'])->group(function () {
         ]); 
 
         // site ayarları buradan yönetiliyor.
-        Route::resource('settings', settingsController::class)->names([
-            'index' => 'settings.index',
-            'create' => 'settings.create',
-            'edit' => 'settings.edit',
-            'store' => 'settings.store',
-            'update' => 'settings.update',
-            'destroy' => 'settings.destroy',
-        ]); 
+        Route::get('settings', [settingsController::class,'index'])->name('settings.index');
+        Route::post('settings', [settingsController::class,'update'])->name('settings.post');
         
         // tree buradan yönetiliyor.
 

@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             langSeeder::class,
             pluginSeeder::class,
             pluginDtlSeeder::class,
+            settingsSeeder::class,
+            settingsDtlSeeder::class,
         ]);
     }
 }

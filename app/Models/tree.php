@@ -28,31 +28,6 @@ class tree extends Model
     protected $guarded  = ["id"];
     
 
-    public function updateTree($request)
-    {
-
-        $this
-            ->where("id" , $request->post("id"))
-            ->update([
-                "parent" => $request->post("parent"),
-                "type" => $request->post("type"),
-                "page_id" => $request->post("page_id"),
-            ]);
-
-        $dtl = new tree_dtl();
-        $dtl->update_dtl($request , $request->post("id"));
-
-        $noti = array(
-            'message' => "Başarıyla Güncellendi",
-            'head'=>'İşlem Başarılı',
-            'type' => 'success',
-            'status' => '200'
-        );
-
-        return $noti;
-
-    }
-
 
     /* bu kısım sayfa başlığını listelemek için*/
     public function getFirstName()

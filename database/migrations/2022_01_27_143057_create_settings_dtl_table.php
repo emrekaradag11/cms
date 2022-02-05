@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePluginTable extends Migration
+class CreateSettingsDtlTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreatePluginTable extends Migration
      */
     public function up()
     {
-        Schema::create('plugin', function (Blueprint $table) {
+        Schema::create('settings_dtl', function (Blueprint $table) {
             $table->id();
-            $table->string("plugin_id");
-            $table->text("option");
+            $table->integer('group_id')->nullable();
+            $table->string('option')->nullable();
+            $table->integer('lang')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +29,6 @@ class CreatePluginTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plugin');
+        Schema::dropIfExists('settings_dtl');
     }
 }

@@ -36,7 +36,7 @@
 
     <div class="modal fade" id="addStatus" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <form action="{{route("admin.addStatusList")}}" method="post" class="modal-content">
+            <form action="{{route('admin.addStatusList')}}" method="post" class="modal-content">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">Durum Ekle</h5>
@@ -68,7 +68,7 @@
 
     <div class="modal fade" id="addStatusType" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <form action="{{route("admin.addStatusListType")}}" method="post" class="modal-content">
+            <form action="{{route('admin.addStatusListType')}}" method="post" class="modal-content">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">Durum Tipi Ekle</h5>
